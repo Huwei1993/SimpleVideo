@@ -8,20 +8,19 @@ import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class VideoListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, VideoItemAdapter.onDeleteLinstener {
     private AsyncTask mVideoUpdateTask;
     private List<VideoItem> mVideoList;
-    private ListView mVideoListView;
+    private CustomListView mVideoListView;
+    private VideoItemAdapter adapter;
 
     private MenuItem mRefreshMenuItem;
 
@@ -31,10 +30,10 @@ public class VideoListActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_video_list);
 
         this.setTitle(R.string.video_list);
-
         mVideoList = new ArrayList<VideoItem>();
-        mVideoListView = (ListView) findViewById(R.id.video_list);
-        VideoItemAdapter adapter = new VideoItemAdapter(this, R.layout.video_item, mVideoList);
+        mVideoListView = (CustomListView) findViewById(R.id.video_list);
+        mVideoListView.initSlideMode(CustomListView.MOD_LEFT);
+        adapter = new VideoItemAdapter(mVideoList, getApplicationContext(), mVideoListView, this);
         mVideoListView.setAdapter(adapter);
         mVideoListView.setOnItemClickListener(this);
 
@@ -119,6 +118,13 @@ public class VideoListActivity extends AppCompatActivity implements AdapterView.
         return true;
     }
 
+    @Override
+    public void deleteScript(int position) {
+        mVideoList.remove(position);
+        adapter = (VideoItemAdapter) mVideoListView.getAdapter();
+        adapter.notifyDataSetChanged();
+    }
+
 
     private class VideoUpdateTask extends AsyncTask<Object, VideoItem, Void> {
 
@@ -180,7 +186,7 @@ public class VideoListActivity extends AppCompatActivity implements AdapterView.
         @Override
         protected void onPostExecute(Void result) {
 
-           // Log.d(TAG, "Task has been finished");
+            // Log.d(TAG, "Task has been finished");
 
             updateResult();
 
@@ -189,7 +195,7 @@ public class VideoListActivity extends AppCompatActivity implements AdapterView.
         @Override
         protected void onCancelled() {
 
-           // Log.d(TAG, "Task has been cancelled");
+            // Log.d(TAG, "Task has been cancelled");
 
             updateResult();
 

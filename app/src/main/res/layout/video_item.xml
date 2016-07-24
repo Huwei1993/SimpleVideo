@@ -1,41 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    android:paddingLeft="-160dp"
+    android:paddingRight="0dp">
 
-    <ImageView
-        android:id="@+id/video_thumb"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:scaleType="center" />
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="120dp">
 
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/option"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical" />
+
+            <RelativeLayout
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:text="删除"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="120dp">
 
-        <TextView
-            android:id="@+id/video_title"
-            style="?android:attr/textAppearanceMedium"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="2dp"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:lines="2" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/video_date"
-            style="?android:attr/textAppearanceSmall"
+            <ImageView
+                android:id="@+id/video_thumb"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:scaleType="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/video_title"
+                    style="?android:attr/textAppearanceMedium"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:lines="2" />
+
+                <TextView
+                    android:id="@+id/video_date"
+                    style="?android:attr/textAppearanceSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="2dp"
+                   android:textColor="#000"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:lines="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="2dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:lines="1" />
-    </LinearLayout>
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
 </LinearLayout>
